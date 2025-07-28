@@ -27,8 +27,7 @@ export async function POST(req: NextRequest) {
       
     );
   } catch (err: any) {
-    console.error("❌ Webhook signature verification failed:", err.message);
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
+     return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
  
   console.log("✅ Stripe event received:", event.type);
@@ -67,14 +66,11 @@ export async function POST(req: NextRequest) {
           .insert({ email, ispro: true });
 
         if (insertError) {
-          console.error("❌ Error inserting user as Pro:", insertError.message);
-        } else {
-          console.log("✅ New user inserted as Pro.");
-        }
+         } else {
+         }
       }
     } else {
-      console.warn("⚠️ No email found in session.");
-    }
+     }
   }
 
   return NextResponse.json({ received: true });

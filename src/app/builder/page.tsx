@@ -3,8 +3,7 @@
 
  import InputMethodSelector from "@/components/InputMethodSelector";
 import Link from "next/link";
-import UpgradeButton from "@/components/UpgradeButton";
-import { syncUser } from "@/lib/syncUser";
+ import { syncUser } from "@/lib/syncUser";
 import { useEffect } from "react";
 
 export default function BuilderPage() {

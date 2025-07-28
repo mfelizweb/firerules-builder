@@ -12,12 +12,10 @@ export default function SessionSync() {
     const supabase = createPagesBrowserClient();
     supabase.auth.getSession().then(({ data, error }) => {
       if (error) {
-        console.error("⚠️ Supabase session error:", error.message);
-        return;
+         return;
       }
       if (data.session) {
-        console.log("✅ Supabase session restored");
-        router.replace("/account");
+         router.replace("/account");
       }
     });
   }, []);
