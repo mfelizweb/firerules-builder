@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,12 +21,12 @@ export const metadata: Metadata = {
   title: "FireRules Builder – Visual Firestore Rules Generator",
   description: "Generate secure and scalable Firestore rules from JSON, visual builder or natural language input using AI.",
   keywords: ["firebase", "firestore", "security rules", "rules generator", "firestore auth", "firebase admin"],
-  authors: [{ name: "mf Develop", url: "https://github.com/tu-github" }],
+  authors: [{ name: "mf Develop", url: "https://github.com/mfelizweb/firerules-builder" }],
   creator: "mf Develop",
   openGraph: {
     title: "FireRules Builder",
     description: "Visual Firestore rules generator with AI support.",
-    url: "https://firerules.vercel.app",
+    url: "https://firerules-builder.vercel.app/",
     siteName: "FireRules",
     images: [
       {
@@ -40,15 +43,30 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createPagesBrowserClient();
+
+     supabase.auth.getSession().then(({ data, error }) => {
+      if (error) {
+        console.error("⚠️ Supabase session error:", error.message);
+      }
+      if (data.session) {
+        console.log("✅ Supabase session restored");
+        router.replace("/account"); 
+      }
+    });
+  }, []);
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-                <NavBar />
-      
+          <NavBar />
           {children}
         </Providers>
       </body>
