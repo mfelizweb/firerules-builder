@@ -30,14 +30,12 @@ export async function POST(req: NextRequest) {
      return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
  
-  console.log("✅ Stripe event received:", event.type);
-
+ 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const email = session.customer_email;
 
-    console.log("📧 Email from session:", email);
-
+ 
     if (email) {
       const { data: user, error: fetchError } = await supabase
         .from("users")
@@ -46,8 +44,7 @@ export async function POST(req: NextRequest) {
         .single();
 
       if (fetchError) {
-        console.error("❌ Error fetching user:", fetchError.message);
-      }
+       }
 
       if (user) {
         const { error: updateError } = await supabase
@@ -56,10 +53,8 @@ export async function POST(req: NextRequest) {
           .eq("email", email);
 
         if (updateError) {
-          console.error("❌ Error updating user to Pro:", updateError.message);
-        } else {
-          console.log("✅ Existing user upgraded to Pro.");
-        }
+         } else {
+         }
       } else {
         const { error: insertError } = await supabase
           .from("users")

@@ -29,7 +29,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (err) {
-    console.error("Stripe Checkout Error:", err);
-    return NextResponse.json({ error: "Stripe error" }, { status: 500 });
+     return NextResponse.json({ error: "Stripe error" }, { status: 500 });
   }
 }

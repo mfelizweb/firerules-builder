@@ -11,13 +11,11 @@ export async function syncUser() {
   } = await supabase.auth.getUser();
 
   if (authError) {
-    console.error("Error getting auth user:", authError.message);
-    return;
+     return;
   }
 
   if (!user) {
-    console.warn("No user found in auth session.");
-    return;
+     return;
   }
 
   const { error: upsertError } = await supabase
@@ -29,8 +27,6 @@ export async function syncUser() {
     });
 
   if (upsertError) {
-    console.error("Error syncing user:", upsertError.message);
-  } else {
-    console.log("✅ User synced successfully");
-  }
+   } else {
+   }
 }

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function AccountPage() {
   
   const user = useUser();
-  const [isPro, setIsPro] = useState(false);
+  const [ispro, setIspro] = useState(false);
   const supabase = createPagesBrowserClient();
 const router = useRouter();
   useEffect(() => {
@@ -19,7 +19,7 @@ const router = useRouter();
 
       const { data, error } = await supabase
         .from("users")
-        .select("isPro")
+        .select("ispro")
         .eq("email", user.email)
         .single();
 
@@ -28,7 +28,7 @@ const router = useRouter();
         return;
       }
 
-      setIsPro(data?.isPro ?? false);
+      setIspro(data?.ispro ?? false);
     };
 
     fetchUser();
@@ -47,7 +47,7 @@ const router = useRouter();
           <>
          <div className="mt-2 text-gray-700 dark:text-gray-300">
   <span>Status: </span>
-{isPro ? (
+{ispro ? (
   <Badge variant="default" className="animate-pulse">🔥 Pro User</Badge>
 ) : (
   <Badge variant="secondary">Free</Badge>
