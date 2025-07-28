@@ -15,7 +15,7 @@ export default function SessionSync() {
          return;
       }
       if (data.session) {
-         router.replace("/account");
+         router.replace("/builder");
       }
     });
   }, []);

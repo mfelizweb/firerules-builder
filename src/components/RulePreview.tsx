@@ -1,17 +1,21 @@
-"use client";
+ "use client";
 
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface RulePreviewProps {
   rules: string;
+  isPro: boolean;
 }
 
-export default function RulePreview({ rules }: RulePreviewProps) {
+export default function RulePreview({ rules, isPro }: RulePreviewProps) {
   const handleCopy = () => {
     navigator.clipboard.writeText(rules);
   };
 
   const handleDownload = () => {
+    if (!isPro) return;
+
     const blob = new Blob([rules], { type: "text/plain;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -27,11 +31,24 @@ export default function RulePreview({ rules }: RulePreviewProps) {
         {rules}
       </pre>
 
-      <div className="flex gap-3">
-        <Button onClick={handleCopy}>Copy</Button>
-        <Button variant="outline" onClick={handleDownload}>
-          Download .rules
-        </Button>
+      <div className="flex flex-col gap-2">
+        {!isPro && (
+          <div className="bg-yellow-100 text-yellow-800 text-sm font-medium px-4 py-2 rounded-md">
+            Upgrade to Pro to enable rule downloads.
+          </div>
+        )}
+
+        <div className="flex items-center gap-3">
+          <Button onClick={handleCopy}>Copy</Button>
+
+          <Button
+            variant="outline"
+            onClick={handleDownload}
+            disabled={!isPro}
+          >
+            Download .rules
+          </Button>
+        </div>
       </div>
     </div>
   );

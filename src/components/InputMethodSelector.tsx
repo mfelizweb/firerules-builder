@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useEffect, useState } from "react";
 import UploadSchema from "./UploadSchema";
@@ -17,7 +17,7 @@ export default function InputMethodSelector() {
   const handleMethodChange = (val: string) => {
     if (val) {
       setMethod(val as typeof method);
-      setRules(""); 
+      setRules("");
     }
   };
 
@@ -27,13 +27,15 @@ export default function InputMethodSelector() {
     setRules(generated);
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchIsPro = async () => {
       const supabase = createPagesBrowserClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
       if (user) {
-        const { data, error } = await supabase
+        const { data } = await supabase
           .from("users")
           .select("ispro")
           .eq("id", user.id)
@@ -50,22 +52,32 @@ export default function InputMethodSelector() {
 
   return (
     <div className="space-y-6">
-      <ToggleGroup
-        type="single"
-        value={method}
-        onValueChange={handleMethodChange}
-        className="flex gap-4"
-      >
-        <ToggleGroupItem value="upload">Upload JSON</ToggleGroupItem>
-        <ToggleGroupItem value="visual">Build Visually</ToggleGroupItem>
-        <ToggleGroupItem value="ai">AI Input</ToggleGroupItem>
-      </ToggleGroup>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+<ToggleGroup
+  type="single"
+  value={method}
+  onValueChange={handleMethodChange}
+  className="flex flex-wrap gap-1 w-full"
+>
+  <ToggleGroupItem className="flex-1 sm:flex-none" value="upload">
+    Upload JSON
+  </ToggleGroupItem>
+  <ToggleGroupItem className="flex-1 sm:flex-none" value="visual">
+    Build Visually
+  </ToggleGroupItem>
+  <ToggleGroupItem className="flex-1 sm:flex-none" value="ai">
+    AI Input
+  </ToggleGroupItem>
+</ToggleGroup>
+
+
+      </div>
 
       {method === "upload" && <UploadSchema onSchemaChange={handleSchemaChange} />}
       {method === "visual" && <CollectionForm onSchemaChange={handleSchemaChange} />}
       {method === "ai" && <RuleFromPrompt onRulesGenerated={setRules} isPro={isPro} />}
 
-      {rules && <RulePreview rules={rules} />}
+      {rules && <RulePreview rules={rules} isPro={isPro} />}
     </div>
   );
 }

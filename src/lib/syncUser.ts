@@ -10,23 +10,26 @@ export async function syncUser() {
     error: authError,
   } = await supabase.auth.getUser();
 
-  if (authError) {
-     return;
-  }
+  if (authError || !user) return;
 
-  if (!user) {
-     return;
-  }
-
-  const { error: upsertError } = await supabase
+   const { data: existingUser, error: fetchError } = await supabase
     .from("users")
-    .upsert({
-      id: user.id,
-      email: user.email,
-      ispro: false,  
-    });
+    .select("ispro")
+    .eq("id", user.id)
+    .single();
+
+  if (fetchError && fetchError.code !== "PGRST116") {
+    console.error("Error checking user:", fetchError);
+    return;
+  }
+
+  const { error: upsertError } = await supabase.from("users").upsert({
+    id: user.id,
+    email: user.email,
+    ispro: existingUser?.ispro ?? false,
+  });
 
   if (upsertError) {
-   } else {
-   }
+    console.error("Error upserting user:", upsertError);
+  }
 }
