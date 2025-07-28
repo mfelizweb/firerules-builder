@@ -4,9 +4,9 @@ import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"; 
 import { useEffect } from "react";
-
+import SessionSync from "@/components/SessionSync"; 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -53,11 +53,9 @@ export default function RootLayout({
 
      supabase.auth.getSession().then(({ data, error }) => {
       if (error) {
-        console.error("⚠️ Supabase session error:", error.message);
-      }
+       }
       if (data.session) {
-        console.log("✅ Supabase session restored");
-        router.replace("/account"); 
+         router.replace("/account"); 
       }
     });
   }, []);
@@ -67,6 +65,7 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
           <NavBar />
+          <SessionSync /> 
           {children}
         </Providers>
       </body>
