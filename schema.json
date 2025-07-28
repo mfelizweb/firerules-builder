@@ -1,0 +1,12 @@
+{
+  "posts": {
+    "fields": {
+      "title": "string",
+      "authorId": "string"
+    },
+    "rules": {
+      "read": "true",
+      "write": "request.auth.uid == resource.data.authorId"
+    }
+  }
+}
