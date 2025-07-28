@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-06-30.basil",
+  apiVersion: "2025-06-30.basil", 
 });
 
 export async function POST(req: Request) {
@@ -19,13 +19,7 @@ export async function POST(req: Request) {
       customer_email: email,
       line_items: [
         {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: "FireRules Pro – Lifetime Access",
-            },
-            unit_amount: 900,  
-          },
+          price: process.env.STRIPE_PRICE_ID!,
           quantity: 1,
         },
       ],
@@ -34,7 +28,8 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
-     return NextResponse.json({ error: "Stripe error" }, { status: 500 });
+  } catch (err) {
+    console.error("Stripe Checkout Error:", err);
+    return NextResponse.json({ error: "Stripe error" }, { status: 500 });
   }
 }
