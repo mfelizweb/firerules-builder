@@ -23,12 +23,13 @@ export const metadata: Metadata = {
   creator: "mf Develop",
   openGraph: {
     title: "FireRules Builder",
-    description: "Visual Firestore rules generator with AI support.",
+    description: "Visual Firestore rules generator with AI support.",   
     url: "https://firerules-builder.vercel.app/",
     siteName: "FireRules",
+  
     images: [
       {
-        url: "/preview.png",  
+        url: "/favicon.svg",  
         width: 1200,
         height: 630,
         alt: "FireRules Builder Preview",

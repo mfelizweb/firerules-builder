@@ -1,0 +1,6 @@
+<!-- fire-rules-logo.svg -->
+<svg width="200" height="40" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+  <text x="0" y="28" font-size="24" font-family="monospace" fill="#F97316" font-weight="bold">fire</text>
+  <text x="58" y="28" font-size="24" font-family="monospace" fill="#e5e7eb" font-weight="normal">rules</text>
+  <text x="130" y="28" font-size="24" font-family="monospace" fill="#10B981" font-weight="normal">builder</text>
+</svg>

@@ -12,10 +12,12 @@ export default function NavBar() {
     <nav className="w-full border-b border-gray-200 dark:border-zinc-800 px-4 py-3 bg-white dark:bg-zinc-900">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0">
         <div className="flex justify-between items-center w-full sm:w-auto">
+          
           <Link
             href="/"
             className="text-lg font-semibold text-black dark:text-white"
           >
+            
             FireRules
           </Link>
         </div>
