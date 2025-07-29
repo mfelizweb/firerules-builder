@@ -4,12 +4,15 @@ import { useEffect } from "react";
 import Link from "next/link";
 import InputMethodSelector from "@/components/InputMethodSelector";
 import { syncUser } from "@/lib/syncUser";
+import { useUserInfo } from "@/components/UserProvider";
+import { Badge } from "@/components/ui/badge";
+
 
 export default function BuilderPage() {
   useEffect(() => {
     syncUser();
   }, []);
-
+  const { user, isPro, loading } = useUserInfo();
   return (
     <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8 bg-gray-50 dark:bg-zinc-950">
       <div className="max-w-4xl mx-auto space-y-6">
@@ -21,9 +24,20 @@ export default function BuilderPage() {
             ← Back to Home
           </Link>
         </div>
+        
+                    <div className="text-sm flex items-center gap-1">
+                      <span>Status:</span>
+                      {isPro ? (
+                        <Badge variant="default" className="animate-pulse">
+                          🔥 Pro User
+                        </Badge>
+                      ) : (
+                        <Badge variant="secondary">Free</Badge>
+                      )}
+                    </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-          Firestore Rules Builder
+          Rules Builder
         </h1>
 
         <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
