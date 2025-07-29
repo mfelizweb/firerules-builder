@@ -23,8 +23,9 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/builder`,
+        success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success`.trim(),
+        cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/builder`.trim(),
+
     });
 
     return NextResponse.json({ url: session.url });
