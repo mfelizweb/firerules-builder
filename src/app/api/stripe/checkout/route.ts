@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -13,11 +13,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
     if (!process.env.STRIPE_PRICE_ID) {
-      return NextResponse.json({ error: "STRIPE_PR is missing" }, { status: 500 });
+      return NextResponse.json({ error: "STRIPE_PRICE_ID is missing" }, { status: 500 });
     }
     if (!process.env.NEXT_PUBLIC_DOMAIN) {
-      return NextResponse.json({ error: "NEXT_is missing" }, { status: 500 });
+      return NextResponse.json({ error: "NEXT_PUBLIC_DOMAIN is missing" }, { status: 500 });
     }
+
+    const domain = process.env.NEXT_PUBLIC_DOMAIN.trim();
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
@@ -29,8 +31,8 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/builder`,
+      success_url: `${domain}/success`,
+      cancel_url: `${domain}/builder`,
     });
 
     return NextResponse.json({ url: session.url });
