@@ -1,8 +1,7 @@
  export async function generateRuleFromText(userInput: string): Promise<string> {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    console.error("❌ Missing OPENAI_API_KEY");
-    throw new Error("Missing OpenAI API key");
+     throw new Error("Missing OpenAI API key");
   }
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -30,8 +29,7 @@
 
   if (!response.ok) {
     const errText = await response.text();
-    console.error("❌ OpenAI API error:", errText);
-    throw new Error(`OpenAI error: ${errText}`);
+     throw new Error(`OpenAI error: ${errText}`);
   }
 
   const data = await response.json();

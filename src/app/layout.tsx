@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import NavBar from "@/components/NavBar";
 import SessionSync from "@/components/SessionSync";
+ import { UserProvider } from "@/components/UserProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: "FireRules Builder – Visual Firestore Rules Generator",
   description: "Generate secure and scalable Firestore rules from JSON, visual builder or natural language input using AI.",
   keywords: ["firebase", "firestore", "security rules", "rules generator", "firestore auth", "firebase admin"],
-  authors: [{ name: "mf Develop", url: "https://github.com/mfelizweb/firerules-builder" }],
+  authors: [{ name: "mf Develop", url: "https://github.com/mfelizweb/rulebuilder" }],
   creator: "mf Develop",
   openGraph: {
     title: "FireRules Builder",
@@ -40,7 +41,10 @@ export const metadata: Metadata = {
   },
 };
 
- export default function RootLayout({
+
+
+export default function RootLayout({
+  
   children,
 }: {
   children: React.ReactNode;
@@ -49,11 +53,15 @@ export const metadata: Metadata = {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <NavBar />
-          <SessionSync />
-          {children}
+          <UserProvider>
+            <NavBar />
+            <SessionSync />
+            {children}
+          </UserProvider>
         </Providers>
       </body>
     </html>
   );
 }
+
+
