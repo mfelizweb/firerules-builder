@@ -3,7 +3,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { generateRuleFromText } from "@/lib/openai";
 
-const MAX_AI_FREE = 10;
+const MAX_AI_FREE = 3;
 const MAX_AI_PRO = 500;
 
 export async function POST(req: NextRequest) {

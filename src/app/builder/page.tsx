@@ -46,7 +46,7 @@ export default function BuilderPage() {
         <>
           <Badge variant="default"  >
                           
-                           {aiUsesThisMonth} / {isPro ? 500 : 10} </Badge>
+                           {aiUsesThisMonth} / {isPro ? 500 : 3} </Badge>
         </>
       )}
     </span>

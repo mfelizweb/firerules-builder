@@ -44,7 +44,7 @@ export default function PricingPage() {
                   <CheckCircle2 size={18} className="text-green-500" /> Visual rules builder
                 </li>
                 <li className="flex items-center gap-2 text-gray-400 dark:text-gray-500 line-through">
-                  <CheckCircle2 size={18} /> AI rule generation (max 10/mo)
+                  <CheckCircle2 size={18} /> AI rule generation (max 3/mo)
                 </li>
                 <li className="flex items-center gap-2 text-gray-400 dark:text-gray-500 line-through">
                   <CheckCircle2 size={18} /> Download .rules file
