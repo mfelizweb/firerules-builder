@@ -20,7 +20,7 @@ export default function RuleFromPrompt({ onRulesGenerated, isPro }: RuleFromProm
 
    const maxAI = isPro ? 500 : 10;
   const reachedLimit = aiUsesThisMonth >= maxAI;
-
+type UpgradeButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
   const handleGenerate = async () => {
     setLoading(true);
     setError("");
@@ -101,7 +101,8 @@ export default function RuleFromPrompt({ onRulesGenerated, isPro }: RuleFromProm
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
             🚀 This AI-powered feature is available for <strong>Pro users</strong> only.
           </p>
-          <UpgradeButton />
+          <UpgradeButton  
+ />
         </motion.div>
       )}
     </div>

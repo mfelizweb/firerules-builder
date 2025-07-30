@@ -55,8 +55,7 @@ export async function POST(req: NextRequest) {
       const customers = await stripe.customers.list({ email });
       if (customers.data.length > 0) {
         customerId = customers.data[0].id;
-        console.log("[Fallback by email]", customerId);
-      }
+       }
     }
 
  
@@ -80,10 +79,8 @@ export async function POST(req: NextRequest) {
 
         if (!updateError) {
           upgradeSuccess = true;
-          console.log("[Supabase] ¡Usuario actualizado con:", updateObj);
-        } else {
-          console.error("[Supabase Error] No se pudo actualizar:", updateError);
-        }
+         } else {
+         }
       } else {
         const { error: insertError } = await supabase
           .from("users")
@@ -91,10 +88,8 @@ export async function POST(req: NextRequest) {
 
         if (!insertError) {
           upgradeSuccess = true;
-          console.log("[Supabase] ¡Usuario creado con:", { email, ...updateObj });
-        } else {
-          console.error("[Supabase Error] No se pudo crear:", insertError);
-        }
+         } else {
+         }
       }
     }
 
@@ -111,8 +106,7 @@ export async function POST(req: NextRequest) {
           `,
         });
       } catch (emailError: any) {
-        console.error("[Resend Error] Error sending welcome email:", emailError);
-      }
+       }
     }
   }
 

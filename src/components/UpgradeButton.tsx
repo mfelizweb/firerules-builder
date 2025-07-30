@@ -4,7 +4,7 @@ import { useUserInfo } from "@/components/UserProvider";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 
-export default function UpgradeButton() {
+export default function UpgradeButton({ className = "" }) {
   const { user, isPro, loading } = useUserInfo();
 
   const handleUpgrade = async () => {
@@ -29,7 +29,7 @@ export default function UpgradeButton() {
     if (data?.url) {
       window.location.href = data.url;
     } else {
-      console.error("Error starting checkout:", data?.error);
+ 
     }
   };
 
@@ -50,8 +50,8 @@ export default function UpgradeButton() {
   }
 
   return (
-    <Button onClick={handleUpgrade}>
-      Upgrade to Pro
-    </Button>
+  <Button onClick={handleUpgrade} className={`cursor-pointer ${className}`}>
+    Upgrade to Pro
+  </Button>
   );
 }
